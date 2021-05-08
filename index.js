@@ -22,6 +22,33 @@ bot.on("guildMemberAdd", member => {
 
 })
 
+/// Say ///
+
+bot.on("message", async message => {
+    if(message.content.startsWith("/say")){
+      message.delete();
+        let msg = message.content.slice(4)
+        if(!msg) return message.reply("Veuillez entrez un message.")
+
+        let embed = new Discord.MessageEmbed()
+        .setDescription(msg)
+        message.channel.send(embed)
+    }    
+})
+
+/// Say ///
+
+/// ADD / SUPR ROLE ///
+
+
+
+/// ADD / SUPR ROLE ///
+
+/// MUTE ///
+
+
+
+/// MUTE ///
 
 /// MUSIQUE ///
 
@@ -320,7 +347,7 @@ bot.on('message', msg => {
 bot.on("ready", async () => {
   bot.user.setStatus("dnd");
   setTimeout(() => {
-    bot.user.setActivity("être l'esclave de 𝙎𝙣𝙞𝙞𝙚𝙧 ♚♛ツ#8825");
+    bot.user.setActivity("être l'esclave de Sniier_#1048");
   }, 100)
 });
 
@@ -418,7 +445,7 @@ exports.help = {
 ///Bot Status///
 
 bot.on('ready', () => {
-  console.log(`Le bot est allumé : Is log as ${bot.user.tag}!`);
+  console.log(`Le bot : (${bot.user.tag}) est allumé !`);
 });
 
 bot.off('inready', () => {
