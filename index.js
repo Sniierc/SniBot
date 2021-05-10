@@ -10,6 +10,8 @@ const { Client, MessageAttachment } = require('discord.js');
 const bot = new Discord.Client();
 
 
+
+
 /// MSG JOIN ///
 bot.on('guildMemberAdd', member => {
   const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
@@ -24,8 +26,9 @@ bot.on('guildMemberAdd', member => {
 bot.on('message', message => {
   if (!message.guild) return;
 
-  if (message.content.startsWith('!kick')) {
+  if (message.content.startsWith('/kick')) {
     const user = message.mentions.users.first();
+    if (message.member.hasPermission('KICK_MEMBERS')) {
     if (user) {
       const member = message.guild.member(user);
       if (member) {
@@ -45,14 +48,20 @@ bot.on('message', message => {
       message.reply("You didn't mention the user to kick!");
     }
   }
+  else (
+    message.channel.send("vous devez avoir la permission de gérer les messages pour éxecuter cette commande !")
+  )
+}
+
 });
 
 bot.on('message', message => {
 
   if (!message.guild) return;
 
-  if (message.content.startsWith('!ban')) {
+  if (message.content.startsWith('/ban')) {
     const user = message.mentions.users.first();
+    if (message.member.hasPermission('BAN_MEMBERS')) {
     if (user) {
       const member = message.guild.member(user);
       if (member) {
@@ -74,6 +83,11 @@ bot.on('message', message => {
       message.reply("You didn't mention the user to ban!");
     }
   }
+  else (
+    message.channel.send("vous devez avoir la permission de gérer les messages pour éxecuter cette commande !")
+  )
+}
+
 });
 
 /// MOD ///
@@ -257,6 +271,7 @@ bot.on('message', message => {
   if (message.content === '!rip') {
     const attachment = new MessageAttachment('https://i.imgur.com/w3duR07.png');
     message.channel.send(attachment);
+
   }
 });
 
