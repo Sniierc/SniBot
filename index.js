@@ -6,21 +6,77 @@ const moment = require('moment');
 const bdd = require("./bdd.json");
 const static = require("static");
 const { checkServerIdentity } = require("tls");
-
-
-
+const { Client, MessageAttachment } = require('discord.js');
 const bot = new Discord.Client();
 
-bot.on("guildMemberAdd", member => {
-  if (bdd["message-bienvenue"]) {
-    bot.channel.cache.get(`776491374445854813`).send(bdd["message-bienvenue"]);
-  }
-  else {
-    bot.channel.cache.get(`776491374445854813`).send("Bienvenue sur le serveur !");
-  }
-  member.roles.add('805195627624398880');
 
-})
+/// MSG JOIN ///
+bot.on('guildMemberAdd', member => {
+  const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
+  if (!channel) return;
+  channel.send(`Welcome to the server, ${member}`);
+});
+
+/// MSG JOIN ///
+
+/// MOD ///
+
+bot.on('message', message => {
+  if (!message.guild) return;
+
+  if (message.content.startsWith('!kick')) {
+    const user = message.mentions.users.first();
+    if (user) {
+      const member = message.guild.member(user);
+      if (member) {
+        member
+          .kick('Optional reason that will display in the audit logs')
+          .then(() => {
+            message.reply(`Successfully kicked ${user.tag}`);
+          })
+          .catch(err => {hy
+            message.reply('I was unable to kick the member');
+            console.error(err);
+          });
+      } else {
+        message.reply("That user isn't in this guild!");
+      }
+    } else {
+      message.reply("You didn't mention the user to kick!");
+    }
+  }
+});
+
+bot.on('message', message => {
+
+  if (!message.guild) return;
+
+  if (message.content.startsWith('!ban')) {
+    const user = message.mentions.users.first();
+    if (user) {
+      const member = message.guild.member(user);
+      if (member) {
+        member
+          .ban({
+            reason: 'Tu as été',
+          })
+          .then(() => {
+            message.reply(`Successfully banned ${user.tag}`);
+          })
+          .catch(err => {
+            message.reply('I was unable to ban the member');
+            console.error(err);
+          });
+      } else {
+        message.reply("That user isn't in this guild!");
+      }
+    } else {
+      message.reply("You didn't mention the user to ban!");
+    }
+  }
+});
+
+/// MOD ///
 
 /// Say ///
 
@@ -197,6 +253,12 @@ bot.on('message', message => {
   }
 });
 
+bot.on('message', message => {
+  if (message.content === '!rip') {
+    const attachment = new MessageAttachment('https://i.imgur.com/w3duR07.png');
+    message.channel.send(attachment);
+  }
+});
 
 bot.on('message', msg => {
   if (msg.content === 'yamete') {
