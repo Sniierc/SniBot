@@ -36,6 +36,7 @@ bot.on("message", async message => {
     }    
 })
 
+
 /// Say ///
 
 /// ADD / SUPR ROLE ///
@@ -190,6 +191,13 @@ bot.on('message' , msg => {
 
 ///Msg Auto///
 
+bot.on('message', message => {
+  if (message.content === 'quel est mon avatar ?') {
+    message.reply(message.author.displayAvatarURL());
+  }
+});
+
+
 bot.on('message', msg => {
   if (msg.content === 'yamete') {
     msg.reply('Kudasai!');
@@ -198,7 +206,7 @@ bot.on('message', msg => {
 
 bot.on('message', msg => {
   if (msg.content === 'all') {
-    msg.reply('TEST');
+    msg.reply('ah nn pardons');
   }
 });
 
@@ -335,8 +343,8 @@ bot.on('message', msg => {
 });
 
 bot.on('message', msg => {
-  if (msg.content === 'uber-eats') {
-    msg.reply('Le code : EATS-IBYCLZ');
+  if (msg.content === 'Quoi ?') {
+    msg.reply('Feur');
   }
 });
 
@@ -460,4 +468,4 @@ function Savebdd() {
   });
 }
 
-bot.login(token.token); 
+bot.login(token.token);
