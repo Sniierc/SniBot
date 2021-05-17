@@ -10,9 +10,22 @@ const { Client, MessageAttachment } = require('discord.js');
 const bot = new Discord.Client();
 
 
+/// CHANGE NICK ///
 
+bot.on('message', message => {
+  let args = message.content.split(" ");
+
+  if (args[0].toLowerCase() === "/changenick") {
+    const user = message.mentions.users.first();
+     var newNickname = args.slice(1).join(" ");
+     message.guild.me.setNickname(newNickname);
+  }
+});
+
+/// NICK ///
 
 /// MSG JOIN ///
+
 bot.on('guildMemberAdd', member => {
   const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
   if (!channel) return;
@@ -260,6 +273,12 @@ bot.on('message' , msg => {
 ///EASTER EGG///
 
 ///Msg Auto///
+
+bot.on('message', message => {
+  if (message.content === 'tg') {
+    message.reply('Toi même ;)');
+  }
+});
 
 bot.on('message', message => {
   if (message.content === 'quel est mon avatar ?') {
