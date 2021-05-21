@@ -24,6 +24,29 @@ bot.on('message', message => {
 
 /// NICK ///
 
+/// Invite ///
+{
+try {
+  bot.on("message", async message => {
+
+    if (message.content.startsWith("/invite"))
+      var embed  = new Discord.MessageEmbed()
+      .setColor("#C0C0C0")
+      .setDescription("Hehe")
+      .setTitle("Cliquez ici pour m'inviter.")
+      .setURL("https://discord.com/api/oauth2/authorize?client_id=839969589151662161&permissions=8&scope=bot")
+      .setFooter("Bot crée par Sniier_#1048")
+      message.channel.send(embed)
+    })
+  
+  } catch (err) {
+    console.log("SA MERE LA PUTE");
+  }
+}
+
+/// Invite ///
+
+
 /// MSG JOIN ///
 
 bot.on('guildMemberAdd', member => {
