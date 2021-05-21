@@ -25,24 +25,19 @@ bot.on('message', message => {
 /// NICK ///
 
 /// Invite ///
-{
-try {
-  bot.on("message", async message => {
 
-    if (message.content.startsWith("/invite"))
-      var embed  = new Discord.MessageEmbed()
-      .setColor("#C0C0C0")
-      .setDescription("Hehe")
-      .setTitle("Cliquez ici pour m'inviter.")
-      .setURL("https://discord.com/api/oauth2/authorize?client_id=839969589151662161&permissions=8&scope=bot")
-      .setFooter("Bot crée par Sniier_#1048")
-      message.channel.send(embed)
-    })
+bot.on("message", async message => {
+  if (message.content.startsWith("/invite")) {
+const MyEmbed = new Discord.MessageEmbed()
+.setColor("#C0C0C0")
+.setDescription("Hehe")
+.setTitle("Cliquez ici pour m'inviter.")
+.setURL("https://discord.com/api/oauth2/authorize?client_id=839969589151662161&permissions=8&scope=bot")
+.setFooter("Bot crée par Sniier_#1048");
+
+    message.channel.send(MyEmbed);
   
-  } catch (err) {
-    console.log("SA MERE LA PUTE");
-  }
-}
+}})
 
 /// Invite ///
 
@@ -218,7 +213,7 @@ bot.on("message", message => {
     let onlines = message.guild.members.cache.filter(({ presence }) => presence.status !== 'offline').size;
     let totalmembers = message.guild.members.cache.size;
     let totalservers = bot.guilds.cache.size;
-    let totalbots = message.guild.members.cache.filter(member => member.user.bot).size;
+    let totalbots = message.guild.members.cache.filter(members => members.user.bot).size;
     let totalrole = message.guild.roles.cache.get('777550325212119081').members.map(member => member.user.tag).length;
 
     const MyEmbed = new Discord.MessageEmbed()
